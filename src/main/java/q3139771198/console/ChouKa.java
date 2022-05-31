@@ -29,7 +29,7 @@ import java.util.logging.Logger;
 
 public final class ChouKa extends JavaPlugin {
 
-    public static final String version = "1.10";
+    public static final String version = "1.11";
     public static final String configVersion = "1.7";
     public Plugin Main = this;
     public static File fileConfig = null;
@@ -116,15 +116,15 @@ public final class ChouKa extends JavaPlugin {
         getServer().getPluginCommand("ChouKa").setTabCompleter(new Command());
         new Metrics(this, 13223);
         if(load()){
-            getLogger().info("插件启动完毕！版本:" +version + " 制作:Console QQ3139771198");
+            getLogger().info("插件启动完毕！版本:" +version + " 制作:skongkonga QQ3139771198");
         }else{
-            getLogger().log(Level.SEVERE,"插件启动异常！版本:" +version + " 制作:Console QQ3139771198");
+            getLogger().log(Level.SEVERE,"插件启动异常！版本:" +version + " 制作:skongkonga QQ3139771198");
         }
     }
     @Override
     public void onDisable() {
         HandlerList.unregisterAll(this);
-        getLogger().info("插件已经关闭了！版本:" +version + " 制作:Console QQ3139771198");
+        getLogger().info("插件已经关闭了！版本:" +version + " 制作:skongkonga QQ3139771198");
     }
 
     public boolean load() {
@@ -578,7 +578,13 @@ public final class ChouKa extends JavaPlugin {
                                 sender.sendMessage("后台不可以进行抽卡");
                                 return true;
                             }
-                            chou(arg1, sender);
+                            if (asyn) {
+                                Bukkit.getScheduler().runTaskAsynchronously(Main, () -> {
+                                    chou(arg1, sender);
+                                });
+                            } else {
+                                chou(arg1, sender);
+                            }
                             return true;
                     }
                 case 2:
@@ -610,11 +616,22 @@ public final class ChouKa extends JavaPlugin {
                                 sender.sendMessage("后台不可以进行兑换");
                                 return true;
                             }
-                            try {
-                                duihuan(sender, args[1]);
-                            } catch (IOException e) {
-                                sender.sendMessage(prefix + getMsg("lang_11"));
-                                e.printStackTrace();
+                            if (asyn) {
+                                Bukkit.getScheduler().runTaskAsynchronously(Main, () -> {
+                                    try {
+                                        duihuan(sender, args[1]);
+                                    } catch (IOException e) {
+                                        sender.sendMessage(prefix + getMsg("lang_11"));
+                                        e.printStackTrace();
+                                    }
+                                });
+                            } else {
+                                try {
+                                    duihuan(sender, args[1]);
+                                } catch (IOException e) {
+                                    sender.sendMessage(prefix + getMsg("lang_11"));
+                                    e.printStackTrace();
+                                }
                             }
                             return true;
                         case "addtime":

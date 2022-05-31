@@ -6,7 +6,7 @@
 
     <groupId>ChouKa</groupId>
     <artifactId>ChouKa</artifactId>
-    <version>1.10</version>
+    <version>1.11</version>
     <packaging>jar</packaging>
 
     <name>ChouKa</name>
