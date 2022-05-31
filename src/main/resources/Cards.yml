@@ -1,0 +1,53 @@
+#抽卡插件 卡的设定
+双十一: #卡组名（此处不可加颜色代码）
+  names: #卡名
+    - "双"
+    - "十"
+    - "一"
+    - "来"
+    - "啦"
+  rates: #对应卡的抽中概率
+    - 25
+    - 25
+    - 25
+    - 25
+    - 25
+  # 聊天栏中显示的名字（此处可加颜色代码）
+  display_name: '双十一'
+  rare_cards: # 稀有卡
+    - "啦"
+  rare_cards_rates: # 保底给稀有卡的概率，此处概率算法同上
+    - 1
+  # 抽到稀有卡后广播内容，若为none则不广播
+  # 变量：{player}:玩家 {cardname}:抽中稀有卡名
+  rare_cards_broadcast: '§c恭喜§e{player}§c抽中了稀有卡§6【{cardname}】'
+  # 抽到稀有卡后发送标题内容，若为''则不发送标题
+  # 变量：{player}:玩家 {cardname}:抽中稀有卡名
+  rare_cards_title: '§c恭喜§e{player}§c抽中了稀有卡' # 主标题
+  rare_cards_subtitle: '§6【{cardname}】' # 副标题
+  # 十连抽保底卡数量，保底为上面设置的稀有卡，稀有卡为空或该值为0则不开启保底
+  guarantee: 1
+  # 抽该卡组播放的音效(可多个)
+  # 格式：[声音]-[音量]-[音调]
+  # 声音：https://bukkit.windit.net/javadoc/org/bukkit/Sound.html
+  sounds:
+    - 'ORB_PICKUP-1-1'
+双十二:
+  names:
+    - "高"
+    - "级"
+    - "奖"
+    - "池"
+  rates:
+    - 33
+    - 33
+    - 33
+    - 33
+  display_name: '双十二'
+  rare_cards: []
+  rare_cards_rates: []
+  rare_cards_broadcast: 'none'
+  rare_cards_title: ''
+  rare_cards_subtitle: ''
+  guarantee: 0
+  sounds: []

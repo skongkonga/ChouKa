@@ -1,0 +1,38 @@
+#抽卡插件 集齐卡组设定
+双十一来啦: #集齐卡组名（此处不可加颜色代码）
+  names:
+    - "双"
+    - "十"
+    - "一"
+    - "来"
+    - "啦"
+  # 集齐获得的物品请使用指令设置
+  Item: []
+  # 聊天栏中显示的名字（此处可加颜色代码）
+  display_name: '双十一来啦'
+  # 集齐后后台执行的指令
+  # 变量：{player}:玩家 {cardname}:集齐卡组名
+  commands:
+    - m {player} 恭喜你集齐了{cardname}!!!
+  # 集齐后广播内容，若为none则不广播
+  # 变量：{player}:玩家 {cardname}:集齐卡组名
+  broadcast: '§c恭喜§e{player}集齐了§6{cardname}!!!'
+  # 集齐后播放的音效(可多个)
+  # 格式：[声音]-[音量]-[音调]
+  # 声音：https://bukkit.windit.net/javadoc/org/bukkit/Sound.html
+  sounds:
+    - 'FIREWORK_LARGE_BLAST-1-1'
+  # 是否提醒兑换
+  remind: true
+高级奖池:
+  names:
+    - "高"
+    - "级"
+    - "奖"
+    - "池"
+  Item: []
+  display_name: '高级奖池'
+  commands: []
+  broadcast: 'none'
+  sounds: []
+  remind: true

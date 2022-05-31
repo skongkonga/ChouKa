@@ -1,0 +1,14 @@
+name: ChouKa
+version: ${project.version}
+main: q3139771198.console.ChouKa
+authors: [skongkonga]
+api-version: 1.13
+softdepend:
+  - ProtocolLib
+commands:
+  ChouKa:
+    description: ChouKa
+    usage: /ChouKa help
+    Permission: ChouKa.Admin
+    permission-message: 你没有<permission>的权限。
+    aliases: [ck]
