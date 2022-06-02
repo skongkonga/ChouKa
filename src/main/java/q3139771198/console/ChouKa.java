@@ -907,7 +907,7 @@ public final class ChouKa extends JavaPlugin {
             for (String cardSetName : Reward_info.keySet()) {
                 int num = isGetAll(getcards(playerName), cardSetName, sender);
                 if (num != 0) {
-                    if (sender.getName().equals(playerName))
+                    if (sender.getName().equals(playerName) && sender instanceof Player)
                         BungeeUtil.sendPartCommandMessage((Player)sender, prefix +
                                         MessageFormat.format(getMsg("lang_29"), num, cardSetName), "兑换",
                                 getMsg("lang_30"), "/ck duihuan " + cardSetName, true);
@@ -915,8 +915,9 @@ public final class ChouKa extends JavaPlugin {
                         sender.sendMessage(prefix + MessageFormat.format(getMsg("lang_31"), num, cardSetName));
                 }
             }
-            BungeeUtil.sendCommandMessage((Player)sender, prefix + getMsg("lang_51"),
-                    getMsg("lang_51"), "/ck yijianduihuan", true);
+            if (sender instanceof Player)
+                BungeeUtil.sendCommandMessage((Player)sender, prefix + getMsg("lang_51"),
+                        getMsg("lang_51"), "/ck yijianduihuan", true);
         }
 
         private void duihuan(CommandSender sender, String name) throws IOException {
