@@ -78,7 +78,7 @@ public final class ChouKa extends JavaPlugin {
     public String mysql_database;
     public String mysql_option;
 
-    private static final Logger log = Logger.getLogger("Minecraft.ChouKa");
+    private static final Logger log = Logger.getLogger("ChouKa");
 
     @Override
     public void onEnable() {
