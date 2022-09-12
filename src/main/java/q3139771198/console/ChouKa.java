@@ -952,8 +952,15 @@ public final class ChouKa extends JavaPlugin {
                             getMsg("lang_30"), "/ck duihuan " + name, true);
                     if (!commands_info.get(name).isEmpty())
                         for (String cmd : commands_info.get(name)) {
-                            Bukkit.dispatchCommand(Bukkit.getConsoleSender(),
-                                    cmd.replace("{player}", sender.getName()).replace("{cardname}", name));
+                            if (asyn)
+                                Bukkit.getScheduler().scheduleSyncDelayedTask(Main, () -> {
+                                    Bukkit.dispatchCommand(Bukkit.getConsoleSender(),
+                                            cmd.replace("{player}", sender.getName()).replace("{cardname}", name));
+                                });
+                            else {
+                                Bukkit.dispatchCommand(Bukkit.getConsoleSender(),
+                                        cmd.replace("{player}", sender.getName()).replace("{cardname}", name));
+                            }
                         }
                     if (!broadcast_info.get(name).equals("none"))
                         Bukkit.broadcastMessage(broadcast_info.get(name).replace("{player}",
