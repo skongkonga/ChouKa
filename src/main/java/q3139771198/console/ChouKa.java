@@ -183,7 +183,9 @@ public final class ChouKa extends JavaPlugin {
                 }
 
             }
-            cardName.addAll(names);
+            for (String name : names)
+                if (!cardName.contains(name))
+                    cardName.add(name);
             cards_info.put(s, names_rates);
             if (Cards.getStringList(s + "..rare_cards") == null) {
                 Cards.set(s + "..rare_cards", new ArrayList<>());
