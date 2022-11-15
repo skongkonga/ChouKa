@@ -991,8 +991,14 @@ public final class ChouKa extends JavaPlugin {
                             }
                         }
                     if (!broadcast_info.get(name).equals("none"))
-                        Bukkit.broadcastMessage(broadcast_info.get(name).replace("{player}",
-                                sender.getName()).replace("{cardname}", name));
+                        if (asyn)
+                            Bukkit.getScheduler().scheduleSyncDelayedTask(Main, () -> {
+                                Bukkit.broadcastMessage(broadcast_info.get(name).replace("{player}",
+                                        sender.getName()).replace("{cardname}", name));
+                            });
+                        else
+                            Bukkit.broadcastMessage(broadcast_info.get(name).replace("{player}",
+                                    sender.getName()).replace("{cardname}", name));
                     if (!reward_sounds.get(name).isEmpty() && reward_sounds.get(name) != null) {
                         Player player = (Player) sender;
                         for (String sounds : reward_sounds.get(name)) {
@@ -1035,8 +1041,14 @@ public final class ChouKa extends JavaPlugin {
                                     }
                                 }
                             if (!broadcast_info.get(name).equals("none"))
-                                Bukkit.broadcastMessage(broadcast_info.get(name).replace("{player}",
-                                        sender.getName()).replace("{cardname}", name));
+                                if (asyn)
+                                    Bukkit.getScheduler().scheduleSyncDelayedTask(Main, () -> {
+                                        Bukkit.broadcastMessage(broadcast_info.get(name).replace("{player}",
+                                                sender.getName()).replace("{cardname}", name));
+                                    });
+                                else
+                                    Bukkit.broadcastMessage(broadcast_info.get(name).replace("{player}",
+                                            sender.getName()).replace("{cardname}", name));
                         }
                         if (!reward_sounds.get(name).isEmpty() && reward_sounds.get(name) != null) {
                             Player player = (Player) sender;
@@ -1217,8 +1229,16 @@ public final class ChouKa extends JavaPlugin {
                     for (String card : cards_rare_cards.get(name)) {
                         if (card.equals(result)) {
                             if (!cards_rare_cards_broadcast.get(name).equals("none")) {
-                                Bukkit.broadcastMessage(cards_rare_cards_broadcast.get(name).replace("{player}",
-                                        sender.getName()).replace("{cardname}", result));
+                                if (asyn) {
+                                    String finalName = name;
+                                    Bukkit.getScheduler().scheduleSyncDelayedTask(Main, () -> {
+                                        Bukkit.broadcastMessage(cards_rare_cards_broadcast.get(finalName).replace("{player}",
+                                                sender.getName()).replace("{cardname}", result));
+                                    });
+                                }
+                                else
+                                    Bukkit.broadcastMessage(cards_rare_cards_broadcast.get(name).replace("{player}",
+                                            sender.getName()).replace("{cardname}", result));
                             }
                             if (!cards_rare_cards_title.get(name).equals("") ||
                                     !cards_rare_cards_subtitle.get(name).equals("")) {
@@ -1278,8 +1298,14 @@ public final class ChouKa extends JavaPlugin {
                             if (card.equals(result)) {
                                 result10.add(result);
                                 if (!cards_rare_cards_broadcast.get(name).equals("none")) {
-                                    Bukkit.broadcastMessage(cards_rare_cards_broadcast.get(name).replace("{player}",
-                                            sender.getName()).replace("{cardname}", result));
+                                    if (asyn)
+                                        Bukkit.getScheduler().scheduleSyncDelayedTask(Main, () -> {
+                                            Bukkit.broadcastMessage(cards_rare_cards_broadcast.get(name).replace("{player}",
+                                                    sender.getName()).replace("{cardname}", result));
+                                        });
+                                    else
+                                        Bukkit.broadcastMessage(cards_rare_cards_broadcast.get(name).replace("{player}",
+                                                sender.getName()).replace("{cardname}", result));
                                 }
                             }
                         }
