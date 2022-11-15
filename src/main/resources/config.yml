@@ -15,4 +15,6 @@ remind: true
 # 若对应指令出现问题可关闭异步
 asyn: true
 # 一键兑换cd（单位：秒）
-cd: 30
+duiHuanCd: 30
+# 抽卡cd（单位：秒）
+chouCd: 10

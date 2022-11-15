@@ -70,7 +70,9 @@ public final class ChouKa extends JavaPlugin {
     public static boolean remind = false;
     public static boolean asyn = false;
 
-    public static int cd = 30;
+    public static int duiHuanCd = 30;
+
+    public static int chouCd = 10;
 
     public String type;
     public String mysql_ip;
@@ -80,7 +82,9 @@ public final class ChouKa extends JavaPlugin {
     public String mysql_database;
     public String mysql_option;
 
-    public HashMap<String, Long> cds = new HashMap<>();
+    public HashMap<String, Long> duiHuanCds = new HashMap<>();
+
+    public HashMap<String, Long> chouCds = new HashMap<>();
 
     private static final Logger log = Logger.getLogger("ChouKa");
 
@@ -158,7 +162,8 @@ public final class ChouKa extends JavaPlugin {
         prefix = config.getString("prefix");
         remind = config.getBoolean("remind");
         asyn = config.getBoolean("asyn");
-        cd = config.getInt("cd");
+        duiHuanCd = config.getInt("duiHuanCd");
+        chouCd = config.getInt("chouCd");
         log.info("登录提醒有次数的玩家抽卡："+remind);
         log.info("一键兑换指令异步执行："+asyn);
         log.info("当前开启的卡组：");
@@ -527,7 +532,7 @@ public final class ChouKa extends JavaPlugin {
                                 sender.sendMessage("后台不可以进行兑换");
                                 return true;
                             }
-                            if (checkCd(sender)) {
+                            if (checkDuiHuanCd(sender)) {
                                 return true;
                             }
                             if (asyn) {
@@ -586,6 +591,9 @@ public final class ChouKa extends JavaPlugin {
                         default:
                             if (sender instanceof ConsoleCommandSender) {
                                 sender.sendMessage("后台不可以进行抽卡");
+                                return true;
+                            }
+                            if (checkChouCd(sender)) {
                                 return true;
                             }
                             if (asyn) {
@@ -891,20 +899,38 @@ public final class ChouKa extends JavaPlugin {
             }
         }
 
-        private boolean checkCd(CommandSender sender) {
+        private boolean checkDuiHuanCd(CommandSender sender) {
             String name = sender.getName();
-            if (cds.containsKey(name)) {
-                long oldTime = cds.get(name);
+            if (duiHuanCds.containsKey(name)) {
+                long oldTime = duiHuanCds.get(name);
                 long nowTime = System.currentTimeMillis();
-                if (nowTime - oldTime < cd * 1000L) {
-                    sender.sendMessage(prefix + MessageFormat.format(getMsg("lang_55"), String.valueOf(cd - (nowTime - oldTime) / 1000)));
+                if (nowTime - oldTime < duiHuanCd * 1000L) {
+                    sender.sendMessage(prefix + MessageFormat.format(getMsg("lang_55"), String.valueOf(duiHuanCd - (nowTime - oldTime) / 1000)));
                     return true;
                 } else {
-                    cds.put(name, System.currentTimeMillis());
+                    duiHuanCds.put(name, System.currentTimeMillis());
                     return false;
                 }
             } else {
-                cds.put(name, System.currentTimeMillis());
+                duiHuanCds.put(name, System.currentTimeMillis());
+                return false;
+            }
+        }
+
+        private boolean checkChouCd(CommandSender sender) {
+            String name = sender.getName();
+            if (chouCds.containsKey(name)) {
+                long oldTime = chouCds.get(name);
+                long nowTime = System.currentTimeMillis();
+                if (nowTime - oldTime < chouCd * 1000L) {
+                    sender.sendMessage(prefix + MessageFormat.format(getMsg("lang_56"), String.valueOf(chouCd - (nowTime - oldTime) / 1000)));
+                    return true;
+                } else {
+                    chouCds.put(name, System.currentTimeMillis());
+                    return false;
+                }
+            } else {
+                chouCds.put(name, System.currentTimeMillis());
                 return false;
             }
         }
